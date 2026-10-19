@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="plugin.video.novaflix" name="NovaFlix" version="0.1.0" provider-name="NovaFlix">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="script.module.pyqrcode" version="1.2.1"/>
+    <import addon="script.novaflix" version="0.1.0"/>
+  </requires>
+  <!-- No <provides>: the Video add-ons tile is script.novaflix, which opens NovaFlix without Kodi's
+       folder screen. plugin:// links (playback, widgets, classic lists) work as before. -->
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="en_GB">Personal TV shows and movies add-on with TorBox playback</summary>
+    <description lang="en_GB">Browse TV shows and movies, choose a source yourself and play it through your own TorBox account. For personal use.</description>
+    <platform>all</platform>
+    <license>Personal use</license>
+    <news>0.1.0: First NovaFlix build.</news>
+    <assets>
+      <icon>novaflix-icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
+<!-- NovaFlix's tile under Video add-ons. Kodi starts a script straight away, so NovaFlix opens without
+     Kodi's folder screen first (a plugin tile always goes through it). The plugin imports this add-on. -->
+<addon id="script.novaflix" name="NovaFlix" version="0.1.0" provider-name="NovaFlix">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+  </requires>
+  <extension point="xbmc.python.script" library="launcher.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Opens NovaFlix</summary>
+    <description lang="en_GB">Starts NovaFlix. Installed together with NovaFlix.</description>
+    <platform>all</platform>
+    <license>Personal use</license>
+    <assets>
+      <icon>novaflix-icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
+<!-- Points Kodi at the NovaFlix update feed (DEC-038/039). REPO_URL in tools/build.py must match. -->
+<addon id="repository.novaflix" name="NovaFlix Repository" version="1.0.0" provider-name="NovaFlix">
+  <extension point="xbmc.addon.repository" name="NovaFlix Repository">
+    <dir minversion="19.0.0">
+      <info compressed="false">https://chiefabs6-ops.github.io/novaflix-repo/addons.xml</info>
+      <checksum verify="sha256">https://chiefabs6-ops.github.io/novaflix-repo/addons.xml.sha256</checksum>
+      <datadir zip="true">https://chiefabs6-ops.github.io/novaflix-repo/</datadir>
+      <hashes>sha256</hashes>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Updates for NovaFlix</summary>
+    <description lang="en_GB">Install this once; Kodi then offers NovaFlix updates from it.</description>
+    <platform>all</platform>
+    <license>Personal use</license>
+    <assets>
+      <icon>novaflix-icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
+</addons>
