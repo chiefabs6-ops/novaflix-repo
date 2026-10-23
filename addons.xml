@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="plugin.video.novaflix" name="NovaFlix" version="0.4.0" provider-name="NovaFlix">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="script.module.pyqrcode" version="1.2.1"/>
+    <import addon="script.novaflix" version="0.1.1"/>
+  </requires>
+  <!-- No <provides>: the Video add-ons tile is script.novaflix, which opens NovaFlix without Kodi's
+       folder screen. plugin:// links (playback, widgets, classic lists) work as before. -->
+  <extension point="xbmc.python.pluginsource" library="default.py"/>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="en_GB">Personal TV shows and movies add-on with TorBox playback</summary>
+    <description lang="en_GB">Browse TV shows and movies, choose a source yourself and play it through your own TorBox account. For personal use.</description>
+    <platform>all</platform>
+    <license>Personal use</license>
+    <news>0.4.0: New cinematic look: full-screen artwork with title logos, an icon rail that opens into the menu, a peek of the focused title above every grid, Films and Shows tabs on Genres, a source drawer with quality badges, and new dialogs with named buttons and download speed, size and time left. 0.3.2: The Polish tab no longer lists English-only releases. 0.3.1: Sources have English and Polish tabs that never mix; multi-audio releases with both languages are in both. 0.3.0: Sources are sorted into quality tabs (4K, 1080p, 720p, SD, Other) with a choice of order; cinema recordings (CAM, TS) are hidden, spam and other-year releases are listed last and marked in red. Popular and Top rated lists can be filtered and sorted by genre, year, rating and release date. 0.2.1: Continue Watching and the title page show whether the next episode is available, not available, airs on a date, or has no English audio. 0.2.0: TV shows and movies from TMDB. Seasons, Continue Watching, My List and More like this. Plays English releases through TorBox; titles without an English release list their own-language releases and say so. 0.1.0: First NovaFlix build.</news>
+    <assets>
+      <icon>novaflix-icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="plugin.video.novaflix" name="NovaFlix" version="0.3.2" provider-name="NovaFlix">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
@@ -46,23 +69,20 @@
     </assets>
   </extension>
 </addon>
-<addon id="plugin.video.novaflix" name="NovaFlix" version="0.3.0" provider-name="NovaFlix">
+<!-- NovaFlix's tile under Video add-ons. Kodi starts a script straight away, so NovaFlix opens without
+     Kodi's folder screen first (a plugin tile always goes through it). The plugin imports this add-on. -->
+<addon id="script.novaflix" name="NovaFlix" version="0.1.1" provider-name="NovaFlix">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="script.module.pyqrcode" version="1.2.1"/>
-    <import addon="script.novaflix" version="0.1.0"/>
   </requires>
-  <!-- No <provides>: the Video add-ons tile is script.novaflix, which opens NovaFlix without Kodi's
-       folder screen. plugin:// links (playback, widgets, classic lists) work as before. -->
-  <extension point="xbmc.python.pluginsource" library="default.py"/>
-  <extension point="xbmc.service" library="service.py"/>
+  <extension point="xbmc.python.script" library="launcher.py">
+    <provides>video</provides>
+  </extension>
   <extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>true</reuselanguageinvoker>
-    <summary lang="en_GB">Personal TV shows and movies add-on with TorBox playback</summary>
-    <description lang="en_GB">Browse TV shows and movies, choose a source yourself and play it through your own TorBox account. For personal use.</description>
+    <summary lang="en_GB">Opens NovaFlix</summary>
+    <description lang="en_GB">Starts NovaFlix. Installed together with NovaFlix.</description>
     <platform>all</platform>
     <license>Personal use</license>
-    <news>0.3.0: Sources are sorted into quality tabs (4K, 1080p, 720p, SD, Other) with a choice of order; cinema recordings (CAM, TS) are hidden, spam and other-year releases are listed last and marked in red. Popular and Top rated lists can be filtered and sorted by genre, year, rating and release date. 0.2.1: Continue Watching and the title page show whether the next episode is available, not available, airs on a date, or has no English audio. 0.2.0: TV shows and movies from TMDB. Seasons, Continue Watching, My List and More like this. Plays English releases through TorBox; titles without an English release list their own-language releases and say so. 0.1.0: First NovaFlix build.</news>
     <assets>
       <icon>novaflix-icon.png</icon>
       <fanart>fanart.png</fanart>
@@ -81,6 +101,27 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="en_GB">Opens NovaFlix</summary>
     <description lang="en_GB">Starts NovaFlix. Installed together with NovaFlix.</description>
+    <platform>all</platform>
+    <license>Personal use</license>
+    <assets>
+      <icon>novaflix-icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
+<!-- Points Kodi at the NovaFlix update feed (DEC-038/039). REPO_URL in tools/build.py must match. -->
+<addon id="repository.novaflix" name="NovaFlix Repository" version="1.0.1" provider-name="NovaFlix">
+  <extension point="xbmc.addon.repository" name="NovaFlix Repository">
+    <dir minversion="19.0.0">
+      <info compressed="false">https://chiefabs6-ops.github.io/novaflix-repo/addons.xml</info>
+      <checksum verify="sha256">https://chiefabs6-ops.github.io/novaflix-repo/addons.xml.sha256</checksum>
+      <datadir zip="true">https://chiefabs6-ops.github.io/novaflix-repo/</datadir>
+      <hashes>sha256</hashes>
+    </dir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Updates for NovaFlix</summary>
+    <description lang="en_GB">Install this once; Kodi then offers NovaFlix updates from it.</description>
     <platform>all</platform>
     <license>Personal use</license>
     <assets>
